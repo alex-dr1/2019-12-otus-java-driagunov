@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * To start the application:
- * $ java -jar ./L01-maven/target/L01-maven-jar-with-dependencies.jar
+ * $ java -jar ./hw01-maven/target/hw01-maven-jar-with-dependencies.jar
  */
 public class HelloOtus {
 

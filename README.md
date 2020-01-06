@@ -12,4 +12,4 @@ OpenJDK Runtime Environment (build 11.0.5+10-post-Ubuntu-0ubuntu1.118.04)<br>
 OpenJDK 64-Bit Server VM (build 11.0.5+10-post-Ubuntu-0ubuntu1.118.04, mixed mode, sharing)<br>
 
 #### Список ДЗ
-1. <a href="/L01-maven">Проект maven с модульной структурой</a>
+1. <a href="/hw01-maven">Проект maven с модульной структурой</a>
