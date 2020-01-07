@@ -9,7 +9,7 @@
     <!--parent>*</parent-->
 
     <groupId>ru.otus</groupId>
-    <artifactId>HW_Driagunov</artifactId>
+    <artifactId>hw-driagunov</artifactId>
     <version>2019-12-SNAPSHOT</version>
 
     <description>Homework</description>
