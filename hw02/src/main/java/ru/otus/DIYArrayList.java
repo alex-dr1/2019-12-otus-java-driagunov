@@ -4,14 +4,12 @@ import java.util.*;
 
 
 public class DIYArrayList<T> implements List<T> {
-    private int modCount;
     private int size;
     private Object[] data;
 
     public DIYArrayList() {
         this.size = 0;
         this.data = new Object[10];
-        this.modCount = 0;
     }
 
     @Override
@@ -128,7 +126,6 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        this.modCount = 0;
         return new DIYIterator();
     }
 
