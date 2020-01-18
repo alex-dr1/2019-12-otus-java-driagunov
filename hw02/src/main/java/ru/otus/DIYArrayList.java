@@ -21,10 +21,7 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public boolean isEmpty() {
-        if (this.size == 0){
-            return true;
-        }
-        return false;
+         return this.size == 0;
     }
 
     @Override
@@ -55,9 +52,9 @@ public class DIYArrayList<T> implements List<T> {
             System.arraycopy(this.data,0, dataNew, 0,this.data.length);
             this.data = dataNew;
         }
-        //System.out.println("i="+this.size+":"+this.data.length);
+
         this.size++;
-        this.data[this.size-1] = (T) t;
+        this.data[this.size-1] = t;
         return true;
     }
 
@@ -93,6 +90,7 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public void clear() {
+
         throw new UnsupportedOperationException();
     }
 
@@ -103,7 +101,7 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public T set(int i, T t) {
-        this.data[i] = (T) t;
+        this.data[i] = t;
         return (T) this.data[i];
     }
 
@@ -131,20 +129,24 @@ public class DIYArrayList<T> implements List<T> {
     @Override
     public ListIterator<T> listIterator() {
         this.modCount = 0;
-        return new Ltr();
+        return new DIYIterator();
     }
 
     @Override
     public ListIterator<T> listIterator(int i) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<T> subList(int i, int i1) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
-    class Ltr implements ListIterator{
+    class DIYIterator implements ListIterator{
+        private int index;
+        public DIYIterator() {
+            this.index = 0;
+        }
 
         @Override
         public boolean hasNext() {
@@ -153,8 +155,7 @@ public class DIYArrayList<T> implements List<T> {
 
         @Override
         public Object next() {
-//            System.out.println(modCount);
-            return DIYArrayList.this.data[modCount];
+            return DIYArrayList.this.data[index];
         }
 
         @Override
@@ -184,8 +185,8 @@ public class DIYArrayList<T> implements List<T> {
 
         @Override
         public void set(Object o) {
-//            System.out.println(modCount++);
-            DIYArrayList.this.data[modCount++] = o;
+            DIYArrayList.this.data[index] = o;
+            index++;
         }
 
         @Override
