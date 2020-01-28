@@ -1,29 +1,32 @@
 package ru.otus;
 
 import java.util.List;
+import java.util.Random;
 
 public class Benchmark {
     private int size;
     private int loopCounter;
-    private List<Long> list;
+    private List<Integer> list;
+    private Random random;
 
-    public Benchmark(int size, int loopCounter, List<Long> list) throws InterruptedException {
+    public Benchmark(int size, int loopCounter, List<Integer> list) throws InterruptedException {
         this.size = size;
         this.loopCounter = loopCounter;
         this.list = list;
+        random = new Random();
     }
 
     public void run() throws InterruptedException {
         for (int i = 0; i < loopCounter; i++){
             listAdd();
             listRemove();
+            Thread.sleep(1500);
         }
     }
 
-    void listAdd () throws InterruptedException {
+    void listAdd () {
         for (int i = 0; i<size; i++){
-            list.add(System.currentTimeMillis());
-            //Thread.sleep(10);
+            list.add(random.nextInt(1_000_000));
         }
     }
 

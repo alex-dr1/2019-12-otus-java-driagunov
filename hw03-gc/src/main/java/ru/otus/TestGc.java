@@ -31,18 +31,17 @@ public class TestGc {
         switchOnMonitoring();
         long beginTime = System.currentTimeMillis();
 
-        List<Long> list = new ArrayList<>();
-        // long 8 byte
+        List<Integer> list = new ArrayList<>();
 
-        int size = 90;
-        int loopCounter = 1_000_000;
+        int size = 1_000_000;
+        int loopCounter = 1200;
 
         Benchmark mbean = new Benchmark(size, loopCounter, list);
         mbean.run();
 
-        if (countMapGC.size() != 0 && durationMapGC.size() != 0){
+        if (countMapGC.size() != 0){
             for (String name: nameGC){
-                System.out.println("Name GC: " + name + " - number of starts: " + countMapGC.get(name) + " wasted time: " + durationMapGC.get(name) / 1000.0 + "s");
+                System.out.println("Name GC: " + name + " - number of starts: " + countMapGC.get(name) + " sum duration: " + durationMapGC.get(name));
             }
         }
 
@@ -61,20 +60,20 @@ public class TestGc {
                 if ( notification.getType().equals( GarbageCollectionNotificationInfo.GARBAGE_COLLECTION_NOTIFICATION ) ) {
                     GarbageCollectionNotificationInfo info = GarbageCollectionNotificationInfo.from( (CompositeData) notification.getUserData() );
                     String gcName = info.getGcName();
-                    String gcAction = info.getGcAction();
-                    String gcCause = info.getGcCause();
+                    //String gcAction = info.getGcAction();
+                    //String gcCause = info.getGcCause();
 
                     long startTime = info.getGcInfo().getStartTime();
                     long duration = info.getGcInfo().getDuration();
 
                     int countGC = countMapGC.get(gcName);
                     countGC++;
-                    countMapGC.put(gcName,countGC);
+                    countMapGC.put( gcName,countGC );
+                    float cleaningTime = countGC / (startTime/1000.0F/60.0F);
 
-                    long durationGC = durationMapGC.get(gcName);
-                    durationMapGC.put(gcName,durationGC + duration);
-
-                    System.out.println( "start:" + startTime/1000.0 + "s Name:" + gcName + ", action:" + gcAction + ", gcCause:" + gcCause + "(" + duration + " ms)" );
+                    durationMapGC.put( gcName,durationMapGC.get(gcName) + duration );
+                    System.out.println( "start:" + startTime/1000.0 + "s Name:" + gcName + "(" + countGC + ") cleaning time: "
+                            + cleaningTime + " 1/min SumDuration " + durationMapGC.get(gcName) / 1000.0 + "s");
                 }
             };
             emitter.addNotificationListener( listener, null, null );
