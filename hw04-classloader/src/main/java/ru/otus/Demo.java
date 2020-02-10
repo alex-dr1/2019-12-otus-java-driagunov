@@ -5,5 +5,6 @@ public class Demo {
         TestLoggingInterface myClass = IoC.createMyClass(new TestLogging());
 
         myClass.calculation(6);
+        myClass.calculation(1,2,3);
     }
 }
