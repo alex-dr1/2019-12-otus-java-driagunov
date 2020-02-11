@@ -7,6 +7,10 @@ public class TestLogging implements TestLoggingInterface {
     @Override
     public void calculation(int param1, int param2, int param3) {}
 
+
+    @Override
+    public void calculationNOTLOG(int param1, int param2, int param3) {}
+
     @Log
     @Override
     public void calculation(int param) {}

@@ -6,5 +6,6 @@ public class Demo {
 
         myClass.calculation(6);
         myClass.calculation(1,2,3);
+        myClass.calculationNOTLOG(1,2,3);
     }
 }
