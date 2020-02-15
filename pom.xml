@@ -23,8 +23,9 @@
     <modules>
         <module>hw01-maven</module>
         <module>hw02</module>
-        <module>hw03-gc</module>
+        <module>hw03-gc</module><<<<<<< hw05-framework
         <module>hw04-classloader</module>
+        <module>hw05-framework</module>
     </modules>
 
     <properties>
