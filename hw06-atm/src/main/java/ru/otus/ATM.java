@@ -13,7 +13,7 @@ public class ATM {
     //================================================
 
     public Map<BankNote, Integer> getMoneyPack(int getMoneyAmount) {
-        System.out.println("Запрос снять: " + getMoneyAmount);
+
         Map<BankNote, Integer> result = new HashMap<>();
         if (getBalance() < getMoneyAmount){
             throw new RuntimeException("Баланс меньше запрошенной суммы");
