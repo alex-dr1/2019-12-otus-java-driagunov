@@ -15,5 +15,6 @@ OpenJDK 64-Bit Server VM (build 11.0.5+10-post-Ubuntu-0ubuntu1.118.04, mixed mod
 1. <a href="/hw01-maven">Проект maven с модульной структурой</a>
 2. <a href="/hw02">Написать свою реализацию ArrayList на основе массива</a>
 3. <a href="/hw03-gc">Сравнение разных сборщиков мусора</a>
-5. <a href="/hw04-classloader">Автоматическое логирование</a>
+4. <a href="/hw04-classloader">Автоматическое логирование</a>
 5. <a href="/hw05-framework">Свой тестовый фреймворк</a>
+6. <a href="/hw06-atm">Эмулятор АТМ (банкомата)</a>

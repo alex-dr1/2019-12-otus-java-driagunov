@@ -26,6 +26,7 @@
         <module>hw03-gc</module>
         <module>hw04-classloader</module>
         <module>hw05-framework</module>
+        <module>hw06-atm</module>
     </modules>
 
     <properties>
