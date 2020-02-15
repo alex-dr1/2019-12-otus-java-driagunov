@@ -12,14 +12,14 @@ public class ATM {
     }
     //================================================
 
-    public Map<BankNote, Long> getMoneyPack(long getMoneyAmount) {
-        System.out.print("Запрос снять: " + getMoneyAmount);
-        Map<BankNote, Long> result = new HashMap<>();
+    public Map<BankNote, Integer> getMoneyPack(int getMoneyAmount) {
+        System.out.println("Запрос снять: " + getMoneyAmount);
+        Map<BankNote, Integer> result = new HashMap<>();
         if (getBalance() < getMoneyAmount){
             throw new RuntimeException("Баланс меньше запрошенной суммы");
         }
         for (BankNote bankNote: BankNote.values()){
-            long dev = getMoneyAmount/bankNote.getRating();
+            int dev = getMoneyAmount/bankNote.getRating();
             if((dev) > 0){
                 if ((getAmountBankNote(bankNote)) > 0){
                     getMoneyAmount = getMoneyAmount - dev*bankNote.getRating();
