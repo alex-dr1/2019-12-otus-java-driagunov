@@ -21,10 +21,22 @@ public class Cassette {
     }
 
     public void putMoney(long putAmount){
-        amount = new CassetteOperation().put(amount, putAmount);
+        if (putAmount < 0){
+            throw new RuntimeException("Нельзя положить отрицательное число купюр");
+        }
+        if (putAmount >= (Long.MAX_VALUE - amount)) {
+            throw new RuntimeException("Нет места под это число купюр");
+        }
+        amount = amount + putAmount;
     }
 
-    public void getMoney(long getAmount){
-        amount = new CassetteOperation().get(amount, getAmount);
+    public void requiredMoney(long getAmount){
+        if (getAmount <= 0){
+            throw new RuntimeException("Нельзя снять 0 или отрицательное число купюр");
+        }
+        if (getAmount > amount) {
+            throw new RuntimeException("Нельзя снять больше чем есть");
+        }
+        amount = amount - getAmount;
     }
 }

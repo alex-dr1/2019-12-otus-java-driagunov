@@ -20,15 +20,16 @@ public class Main {
         atm = new ATM(cassettes);
 
         Map<BankNote,Integer> putMoneyPack1 = new HashMap<>();
-        putMoneyPack1.put(BankNote.R200, 5);
-        putMoneyPack1.put(BankNote.R100, 10);
-        putMoneyPack1.put(BankNote.R500, 4);
-        putMoneyPack1.put(BankNote.R1000, 6);
+        putMoneyPack1.put(BankNote.R200, 0);
+        putMoneyPack1.put(BankNote.R100, 0);
+        putMoneyPack1.put(BankNote.R500, 2);
+        putMoneyPack1.put(BankNote.R1000, 0);
+        putMoneyPack1.put(BankNote.R5000, 1);
         atm.putMoneyPack(putMoneyPack1);
         System.out.println("Баланс: " + atm.getBalance());
 
 
-        System.out.println(atm.getMoneyPack(3600));
+        System.out.println(atm.requiredAmount(5100));
         System.out.println("Баланс: " + atm.getBalance());
 
 
@@ -40,7 +41,7 @@ public class Main {
         atm.putMoneyPack(putMoneyPack2);
         System.out.println("Баланс: " + atm.getBalance());
 
-        System.out.println(atm.getMoneyPack(6541));
+        System.out.println(atm.requiredAmount(6541));
         System.out.println("Баланс: " + atm.getBalance());
 
 

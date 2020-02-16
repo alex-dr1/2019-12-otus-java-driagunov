@@ -38,9 +38,9 @@ class ATMTest {
         getMoneyPack.put(BankNote.R100, 1);
         getMoneyPack.put(BankNote.R500, 1);
 
-        assertEquals(getMoneyPack, atm.getMoneyPack(3600));
+        assertEquals(getMoneyPack, atm.requiredAmount(3600));
         assertEquals(6_400L, atm.getBalance());
-        assertThrows(RuntimeException.class, ()->atm.getMoneyPack(100000));
+        assertThrows(RuntimeException.class, ()->atm.requiredAmount(100000));
     }
 
     @Test

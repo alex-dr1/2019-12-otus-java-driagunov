@@ -12,18 +12,18 @@ public class ATM {
     }
     //================================================
 
-    public Map<BankNote, Integer> getMoneyPack(int getMoneyAmount) {
-
+    public Map<BankNote, Integer> requiredAmount(int getMoneyAmount) {
         Map<BankNote, Integer> result = new HashMap<>();
         if (getBalance() < getMoneyAmount){
             throw new RuntimeException("Баланс меньше запрошенной суммы");
         }
-        for (BankNote bankNote: BankNote.values()){
+        for (Cassette cassette: cassetteList){
+            BankNote bankNote = cassette.getBankNote();
             int dev = getMoneyAmount/bankNote.getRating();
             if((dev) > 0){
                 if ((getAmountBankNote(bankNote)) > 0){
                     getMoneyAmount = getMoneyAmount - dev*bankNote.getRating();
-                    getBankNote(bankNote, dev);
+                    requiredBankNote(bankNote, dev);
                     result.put(bankNote, dev);
                 }
             }
@@ -32,10 +32,10 @@ public class ATM {
     }
 
     // снять такие-то бакноты в таком-то количестве
-    private void getBankNote(BankNote bankNote, long getAmount){
+    private void requiredBankNote(BankNote bankNote, long getAmount){
         for (Cassette cassette: cassetteList){
             if(cassette.getBankNote() == bankNote){
-                cassette.getMoney(getAmount);
+                cassette.requiredMoney(getAmount);
             }
         }
     }

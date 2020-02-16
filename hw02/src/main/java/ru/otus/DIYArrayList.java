@@ -44,7 +44,7 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public boolean add(T t) {
-        // TODO: Добавить контроль за размером массива(диапазон int, 4byte)
+
         if (this.size == this.data.length){
             Object[] dataNew = new Object[this.data.length*2];
             System.arraycopy(this.data,0, dataNew, 0,this.data.length);
