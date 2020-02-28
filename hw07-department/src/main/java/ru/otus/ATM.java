@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ATM {
+public class ATM implements ATMBalance {
     private final String nameATM;
     private final Set<Cassette> cassetteSet;
 
@@ -73,6 +73,7 @@ public class ATM {
     }
 
     // баланс в банкомате
+    @Override
     public long getBalance(){
         long result = 0;
         for (BankNote bankNote: BankNote.values()){

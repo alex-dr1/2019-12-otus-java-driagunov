@@ -7,7 +7,6 @@ import java.util.TreeSet;
 public class Department {
     private final String nameDepartment;
     private final Set<ATM> atmSet = new TreeSet<>(new ATMSort());;
-
     public Department(String nameDepartment, int amountATM) {
         this.nameDepartment = nameDepartment;
 
@@ -22,4 +21,11 @@ public class Department {
         System.out.println("Департамент: " + nameDepartment);
         atmSet.forEach(System.out::println);
     }
+
+    public void showATMBalance(){
+        CollectBalance collectBalance = new CollectBalance();
+        atmSet.forEach(collectBalance::addATM);
+        collectBalance.executeATMBalance();
+    }
+
 }

@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Department department1 = new Department("One", 4);
         department1.showDepartment();
+        department1.showATMBalance();
 
 /*
         ATM atm = new ATM.ATMBuilder()
