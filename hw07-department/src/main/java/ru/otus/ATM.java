@@ -3,9 +3,9 @@ package ru.otus;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class ATM {
-    // TODO Builder atm added
     private final String nameATM;
     private final Set<Cassette> cassetteSet;
 
@@ -13,9 +13,11 @@ public class ATM {
         return nameATM;
     }
 
-    public ATM(String nameATM, Set<Cassette> cassetteSet) {
-        this.nameATM = nameATM;
-        this.cassetteSet = cassetteSet;
+    public ATM(ATMBuilder atmBuilder) {
+        if(atmBuilder.nameATM == null)
+            throw new RuntimeException("ATMBuilder: nameATM is null");
+        this.nameATM = atmBuilder.nameATM;
+        this.cassetteSet = atmBuilder.cassetteSetBuilder;
     }
     //================================================
 
@@ -43,7 +45,6 @@ public class ATM {
         }
         return result;
     }
-
     private int withdrawalProcess(int moneyAmount, Map<BankNote, Integer> result, BankNote bankNote, int sum) {
         moneyAmount = moneyAmount - sum*bankNote.getRating();
         requiredBankNote(bankNote, sum);
@@ -98,7 +99,7 @@ public class ATM {
     @Override
     public String toString(){
         StringBuilder result;
-        result = new StringBuilder("=======================\n");
+        result = new StringBuilder();
         result.append("Банкомат: ").append(getNameATM()).append("\n");
         result.append("  Баланс: ").append(getBalance()).append("\n");
         result.append("  Купюры: {");
@@ -115,5 +116,24 @@ public class ATM {
         result.append("}\n");
 
         return result.toString();
+    }
+
+    public static class ATMBuilder{
+        private String nameATM;
+        private Set<Cassette> cassetteSetBuilder = new TreeSet<>(new CassetteSort());
+
+        ATMBuilder nameATM (String nameATM){
+            this.nameATM = nameATM;
+            return this;
+        }
+
+        ATMBuilder addCassette(BankNote bankNote, int amount){
+            cassetteSetBuilder.add(new Cassette(bankNote, amount));
+            return this;
+        }
+
+        ATM build(){
+            return new ATM(this);
+        }
     }
 }

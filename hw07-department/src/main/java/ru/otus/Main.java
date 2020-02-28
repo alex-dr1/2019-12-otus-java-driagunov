@@ -6,19 +6,21 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        Department department1 = new Department("One", 4);
+        department1.showDepartment();
 
-
-        ATM atm = new ATMFactory.ATMBuilder()
+/*
+        ATM atm = new ATM.ATMBuilder()
                     .nameATM("ATM99")
-                    .addCassette(BankNote.R100, 0)
-                    .addCassette(BankNote.R200,0)
-                    .addCassette(BankNote.R1000,0)
-                    .addCassette(BankNote.R5000,0)
-                    .build()
-                .create();
+                    .addCassette(BankNote.R100, 10)
+                    .addCassette(BankNote.R200,10)
+                    .addCassette(BankNote.R1000,10)
+                    .addCassette(BankNote.R5000,10)
+                    .addCassette(BankNote.R2000,10)
+                    .addCassette(BankNote.R500,10)
+                    .build();
 
-
-        //System.out.println(atm);
+        System.out.println(atm);
 
         Map<BankNote,Integer> putMoneyPack1 = new HashMap<>();
         putMoneyPack1.put(BankNote.R200, 0);
@@ -46,6 +48,6 @@ public class Main {
         System.out.println("снял: 6200" + atm.requiredAmount(6200));
         System.out.println(atm);
 
-
+*/
     }
 }
