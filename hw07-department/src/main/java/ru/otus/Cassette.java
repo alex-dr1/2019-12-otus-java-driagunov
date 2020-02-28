@@ -1,6 +1,5 @@
 package ru.otus;
 
-
 public class Cassette {
     private long amount;
     private final BankNote bankNote;
@@ -32,11 +31,19 @@ public class Cassette {
 
     public void requiredMoney(long getAmount){
         if (getAmount <= 0){
-            throw new RuntimeException("Нельзя снять 0 или отрицательное число купюр");
+            throw new RuntimeException(bankNote + " Нельзя снять 0 или отрицательное число купюр");
         }
         if (getAmount > amount) {
-            throw new RuntimeException("Нельзя снять больше чем есть");
+            throw new RuntimeException(bankNote + " Нельзя снять " + getAmount + " из " + amount);
         }
         amount = amount - getAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Cassette{" +
+                "amount=" + amount +
+                ", bankNote=" + bankNote +
+                '}';
     }
 }
