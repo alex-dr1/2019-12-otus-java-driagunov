@@ -13,20 +13,20 @@ public class ATM implements ATMBalance {
         return nameATM;
     }
 
-    public ATM(ATMBuilder atmBuilder) {
+    private ATM(ATMBuilder atmBuilder) {
         if(atmBuilder.nameATM == null)
             throw new RuntimeException("ATMBuilder: nameATM is null");
         this.nameATM = atmBuilder.nameATM;
         this.cassetteSet = atmBuilder.cassetteSetBuilder;
     }
     //================================================
-
+    // снять какую-то сумму
     public Map<BankNote, Integer> requiredAmount(int getMoneyAmount) {
 
         Map<BankNote, Integer> result = new HashMap<>();
 
         if (getBalance() < getMoneyAmount){
-            throw new RuntimeException("Баланс меньше запрошенной суммы");
+            throw new RuntimeException("Баланс " + getBalance() + " меньше запрошенной суммы " + getMoneyAmount);
         }
 
         for (Cassette cassette : cassetteSet){
@@ -60,9 +60,10 @@ public class ATM implements ATMBalance {
             }
         }
     }
+
     //================================================
     // кол-во банкнот в банкомате
-    private int getAmountBankNote(BankNote bankNote){
+    int getAmountBankNote(BankNote bankNote){
         int result = 0;
         for (Cassette cassette: cassetteSet){
             if(cassette.getBankNote() == bankNote){
@@ -117,6 +118,18 @@ public class ATM implements ATMBalance {
         result.append("}\n");
 
         return result.toString();
+    }
+
+    public ATM copy(){
+        return new ATM.ATMBuilder()
+                .nameATM(nameATM)
+                .addCassette(BankNote.R100,  getAmountBankNote(BankNote.R100))
+                .addCassette(BankNote.R200,  getAmountBankNote(BankNote.R200))
+                .addCassette(BankNote.R1000, getAmountBankNote(BankNote.R1000))
+                .addCassette(BankNote.R5000, getAmountBankNote(BankNote.R5000))
+                .addCassette(BankNote.R2000, getAmountBankNote(BankNote.R2000))
+                .addCassette(BankNote.R500,  getAmountBankNote(BankNote.R500))
+                .build();
     }
 
     public static class ATMBuilder{
