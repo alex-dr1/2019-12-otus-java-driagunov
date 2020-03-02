@@ -1,6 +1,6 @@
 package ru.otus;
 
-public interface ATMBalance {
+public interface ATMInfo {
     long getBalance();
     String getNameATM();
 }

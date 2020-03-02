@@ -8,7 +8,7 @@ public class SnapshotInit {
 
     public void save(Set<ATM> atmSet){
         for (ATM atm : atmSet) {
-            atmSetInit.add(atm.copy());
+            atmSetInit.add(atm.clone());
         }
     }
 

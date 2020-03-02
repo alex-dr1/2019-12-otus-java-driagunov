@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ATM implements ATMBalance {
+public class ATM implements ATMInfo {
     private final String nameATM;
     private final Set<Cassette> cassetteSet;
 
@@ -120,7 +120,7 @@ public class ATM implements ATMBalance {
         return result.toString();
     }
 
-    public ATM copy(){
+    public ATM clone(){
         return new ATM.ATMBuilder()
                 .nameATM(nameATM)
                 .addCassette(BankNote.R100,  getAmountBankNote(BankNote.R100))

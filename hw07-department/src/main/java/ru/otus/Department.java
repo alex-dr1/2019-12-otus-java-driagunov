@@ -26,8 +26,7 @@ public class Department {
 
     public void showATMBalance(){
         CollectBalance collectBalance = new CollectBalance();
-        atmSet.forEach(collectBalance::addATM);
-        collectBalance.executeATMBalance();
+        collectBalance.executeATMBalance(atmSet);
     }
 
     public void requiredAllATM (int amount){
