@@ -28,6 +28,7 @@
         <module>hw05-framework</module>
         <module>hw06-atm</module>
         <module>hw07-department</module>
+        <module>hw08-serialization</module>
     </modules>
 
     <properties>
