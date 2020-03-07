@@ -1,9 +1,9 @@
 package ru.otus;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DiyGson {
     public String toJson(Object object) {
@@ -22,39 +22,57 @@ public class DiyGson {
 //            "longSet":[10,200,3000] SetN
 //        }
 
-
-        Class<?> oClass = object.getClass();
-
-        if(isPrimitive(oClass)){
-            return object.toString();
-        } else
-            if (isCharacterOrString(oClass)){
-                return "\"" + object.toString() + "\"";
-            }
-        /*Field[] declaredFields = oClass.getDeclaredFields();
-        for (Field field : declaredFields) {
-            System.out.print(field.getName());
-            System.out.print(" - ");
-            System.out.print(field.getType());
-            System.out.print(" - ");
-            System.out.println();
-
+        StringBuilder stringBuilder = new StringBuilder();
+        if( isPrimitive( object, stringBuilder ) ){
+            return stringBuilder.toString();
         }
-        System.out.println(oClass.getName());
 
-         */
-        return "***";
+        stringBuilder.append("{");
+
+        Class<?> aClass = object.getClass();
+        Field[] declaredFields = aClass.getDeclaredFields();
+        try {
+            int i = 5;
+            declaredFields[i].setAccessible(true);
+            Object o7 = declaredFields[i].get(object);
+            declaredFields[i].setAccessible(false);
+            stringBuilder.append("\"");
+            stringBuilder.append(declaredFields[i].getName());
+            stringBuilder.append("\":");
+            //stringBuilder.append(o7.toString());
+            isPrimitive(o7, stringBuilder);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        stringBuilder.append("}");
+        return stringBuilder.toString();
     }
 
-    static boolean isPrimitive(Class<?> type) {
+    boolean isPrimitiveWrapper(Class<?> type) {
         return (type.isPrimitive() && type != void.class) ||
                 type == Double.class || type == Float.class || type == Long.class ||
                 type == Integer.class || type == Short.class || type == Byte.class ||
                 type == Boolean.class;
     }
 
-    static boolean isCharacterOrString(Class<?> type) {
+    boolean isCharacterOrString(Class<?> type) {
         return type == Character.class || type == String.class;
+    }
+
+    boolean isPrimitive(Object o, StringBuilder sb){
+        if(isPrimitiveWrapper(o.getClass())){
+            sb.append(o.toString());
+            return true;
+        } else
+            if (isCharacterOrString(o.getClass())){
+                sb.append("\"");
+                sb.append(o.toString());
+                sb.append("\"");
+                return true;
+            } else
+                return false;
+
     }
 
 }

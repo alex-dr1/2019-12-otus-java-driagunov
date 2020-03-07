@@ -23,6 +23,8 @@ public class DiyGsonDemo {
                 (short) 344,
                 88888,
                 10_000_000L,
+                12.34F,
+                56.89,
                 "text123",
                 List.of("one", "two", "three"),
                 Set.of(10L, 200L, 3000L)
@@ -30,7 +32,7 @@ public class DiyGsonDemo {
 //        System.out.println(obj);
 
         Object obj2 = obj;
-//        Object obj2 = "121";
+//        Object obj2 = 123.567;
 
         String json = gson.toJson(obj2);
 
