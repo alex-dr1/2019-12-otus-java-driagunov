@@ -5,11 +5,11 @@ import java.util.Collection;
 
 public class DiyGson {
     public String toJson(Object object) {
-        return parseObject(object);
+        return getParseObject(object);
     }
 
-    String parsePrimitive(Object object) {
-        if ( object == null ) return null;
+    String getParseObject(Object object){
+        if (object == null) return null;
 
         if ( isPrimitive(object) ){
             return object.toString();
@@ -20,38 +20,33 @@ public class DiyGson {
                     object.toString() +
                     "\"";
         }
-        return null;
-    }
-
-    String parseObject(Object object){
-        if (object == null) return null;
-
-        if(isPrimitive(object) || isCharacterOrString(object)){
-            return parsePrimitive(object);
-        }
 
         if(isCollection(object)){
-            StringBuilder sb = new StringBuilder();
-            sb.append("[");
+            StringBuilder jsonBuilder = new StringBuilder();
+            jsonBuilder.append("[");
             Object[] arrayObject= ((Collection) object).toArray();
             for (int j = 0; j < arrayObject.length; j++){
-                sb.append(parseObject(arrayObject[j]));
+                jsonBuilder.append(getParseObject(arrayObject[j]));
                 if (j < arrayObject.length-1){
-                    sb.append(",");
+                    jsonBuilder.append(",");
                 }
             }
-            sb.append("]");
-            return sb.toString();
+            jsonBuilder.append("]");
+            return jsonBuilder.toString();
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{");
+        return getBasicParseObject(object);
+    }
+
+    private String getBasicParseObject(Object object) {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{");
         Class<?> aClass = object.getClass();
         Field[] fields = aClass.getDeclaredFields();
         for (int i = 0; i < fields.length; i++){
-            stringBuilder.append("\"");
-            stringBuilder.append(fields[i].getName());
-            stringBuilder.append("\":");
+            jsonBuilder.append("\"");
+            jsonBuilder.append(fields[i].getName());
+            jsonBuilder.append("\":");
             fields[i].setAccessible(true);
             Object objField = new Object();
             try {
@@ -59,14 +54,14 @@ public class DiyGson {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-            stringBuilder.append(parseObject(objField));
+            jsonBuilder.append(getParseObject(objField));
             if (i < fields.length-1){
-                stringBuilder.append(",");
+                jsonBuilder.append(",");
             }
             fields[i].setAccessible(false);
         }
-        stringBuilder.append("}");
-        return stringBuilder.toString();
+        jsonBuilder.append("}");
+        return jsonBuilder.toString();
     }
 
     boolean isPrimitive(Object o) {

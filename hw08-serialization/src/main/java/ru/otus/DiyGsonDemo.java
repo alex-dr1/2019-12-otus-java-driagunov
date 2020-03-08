@@ -9,12 +9,6 @@ import java.util.Set;
 
 public class DiyGsonDemo {
     public static void main(String[] args) {
-//        {"boolean":true,"value2":"t","value1":22,"value2":"test","stringList":["one","two","three"],"longSet":[3000,10,200]}
-//        null
-//        ""
-//        "12345"
-//        12345
-
         Gson gson = new Gson();
         DiyGson diyGson = new DiyGson();
 
@@ -35,13 +29,8 @@ public class DiyGsonDemo {
         );
         System.out.println(obj);
 
-        String json = gson.toJson(obj);
         String diyJson = diyGson.toJson(obj);
 
-        System.out.print("   JSON = ");
-        System.out.println(json);
-
-        System.out.print("DiyJSON = ");
         System.out.println(diyJson);
 
         BagOfValues obj2 = gson.fromJson(diyJson, BagOfValues.class);
