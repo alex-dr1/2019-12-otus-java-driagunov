@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 
 public class DiyGson {
-    public String toJson(Object object) {
-        return getParseObject(object);
+    public String toJson(Object src) {
+        return getParseObject(src);
     }
 
     String getParseObject(Object object){

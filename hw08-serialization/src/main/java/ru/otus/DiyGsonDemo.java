@@ -27,6 +27,7 @@ public class DiyGsonDemo {
                 List.of("one", "two", "three"),
                 Set.of(10L, 200L, 3000L)
         );
+
         System.out.println(obj);
 
         String diyJson = diyGson.toJson(obj);
