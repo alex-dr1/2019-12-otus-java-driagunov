@@ -8,7 +8,7 @@ public class DiyGson {
         return getParseObject(src);
     }
 
-    String getParseObject(Object object){
+    private String getParseObject(Object object){
         if (object == null) return null;
 
         if ( isPrimitive(object) ){
@@ -66,19 +66,19 @@ public class DiyGson {
 
     boolean isPrimitive(Object o) {
         Class<?> aClass = o.getClass();
-        return  aClass == Double.class ||
-                aClass == Float.class ||
-                aClass == Long.class ||
-                aClass == Integer.class ||
-                aClass == Short.class ||
-                aClass == Byte.class ||
-                aClass == Boolean.class;
+        return  aClass.equals(Double.class) ||
+                aClass.equals(Float.class) ||
+                aClass.equals(Long.class) ||
+                aClass.equals(Integer.class) ||
+                aClass.equals(Short.class) ||
+                aClass.equals(Byte.class) ||
+                aClass.equals(Boolean.class);
     }
 
     boolean isCharacterOrString(Object o) {
         Class<?> aClass = o.getClass();
-        return aClass == Character.class ||
-                aClass == String.class;
+        return aClass.equals(Character.class) ||
+                aClass.equals(String.class);
     }
 
     boolean isCollection(Object o) {
