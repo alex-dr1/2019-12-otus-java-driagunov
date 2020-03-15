@@ -1,6 +1,6 @@
 package ru.otus.core.model;
 
-import ru.otus.jdbc.dao.Id;
+import ru.otus.diyorm.Id;
 
 public class User {
 

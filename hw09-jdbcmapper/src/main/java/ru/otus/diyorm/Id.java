@@ -1,4 +1,4 @@
-package ru.otus.jdbc.dao;
+package ru.otus.diyorm;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
