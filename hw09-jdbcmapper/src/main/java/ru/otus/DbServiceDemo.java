@@ -35,20 +35,19 @@ public class DbServiceDemo {
     UserDao userDao = new UserDaoJdbc(sessionManager, dbExecutor);
 
     DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
-    long id = dbServiceUser.saveUser(new User(0, "dbServiceUser"));
+    long id = dbServiceUser.saveUser(new User(0, "User", 20));
     Optional<User> user = dbServiceUser.getUser(id);
 
-    System.out.println(user);
-    user.ifPresentOrElse(
-        crUser -> logger.info("created user, name:{}", crUser.getName()),
-        () -> logger.info("user was not created")
+     user.ifPresentOrElse(
+        crUser -> logger.info("created object:{}", user.get()),
+        () -> logger.info("object was not created")
     );
 
   }
 
   private void createTable(DataSource dataSource) throws SQLException {
     try (Connection connection = dataSource.getConnection();
-         PreparedStatement pst = connection.prepareStatement("create table user(id long auto_increment, name varchar(50))")) {
+         PreparedStatement pst = connection.prepareStatement("create table user(id long auto_increment, name varchar(50), age int(3))")) {
       pst.executeUpdate();
     }
     System.out.println("table created");
