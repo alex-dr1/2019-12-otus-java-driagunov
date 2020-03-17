@@ -1,14 +1,16 @@
 package ru.otus.core.model;
 
-import ru.otus.diyorm.Id;
 
 import java.math.BigDecimal;
 
 public class Account {
   @Id
-  private final long no;
-  private final String type;
-  private final BigDecimal rest;
+  private long no;
+  private String type;
+  private BigDecimal rest;
+
+  public Account() {
+  }
 
   public Account(long no, String type, BigDecimal rest) {
     this.no = no;
@@ -26,6 +28,18 @@ public class Account {
 
   public BigDecimal getRest() {
     return rest;
+  }
+
+  public void setNo(long no) {
+    this.no = no;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public void setRest(BigDecimal rest) {
+    this.rest = rest;
   }
 
   @Override
