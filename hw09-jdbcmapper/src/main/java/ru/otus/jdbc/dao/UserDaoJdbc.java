@@ -49,12 +49,8 @@ public class UserDaoJdbc implements UserDao {
 
   @Override
   public long saveUser(User user) {
-    try {
-      return dbExecutor.insertRecord(getConnection(), "insert into user(name) values (?)", Collections.singletonList(user.getName()));
-    } catch (Exception e) {
-      logger.error(e.getMessage(), e);
-      throw new UserDaoException(e);
-    }
+    JdbcMapper<User> jdbcMapper = new JdbcMapper<>(dbExecutor, getConnection());
+    return jdbcMapper.create(user);
   }
 
   @Override

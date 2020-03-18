@@ -5,7 +5,7 @@ import ru.otus.core.sessionmanager.SessionManager;
 
 import java.util.Optional;
 
-public interface UserDao extends GenericDao<User> {
+public interface UserDao {
   Optional<User> findById(long id);
 
   long saveUser(User user);
