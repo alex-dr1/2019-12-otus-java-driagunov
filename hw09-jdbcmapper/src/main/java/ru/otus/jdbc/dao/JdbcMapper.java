@@ -7,9 +7,13 @@ import ru.otus.core.model.Id;
 import ru.otus.jdbc.DbExecutor;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JdbcMapper<T> {
   private static Logger logger = LoggerFactory.getLogger(JdbcMapper.class);
@@ -22,13 +26,13 @@ public class JdbcMapper<T> {
     this.connection = connection;
   }
 
-  long create(T objectData){
+  public long create(T objectData){
     StringBuilder sql1 = new StringBuilder("insert into ");
     StringBuilder sql2 = new StringBuilder(") values (");
     String nameClass = objectData.getClass().getSimpleName().toLowerCase();
     sql1.append(nameClass);
     sql1.append("(");
-    List<Field> fieldList = getFields(objectData);
+    List<Field> fieldList = getFieldsObject(objectData);
     List<String> paramsList = new ArrayList<>();
     for (int i = 1; i < fieldList.size(); i++){
       fieldList.get(i).setAccessible(true);
@@ -57,20 +61,53 @@ public class JdbcMapper<T> {
     }
   }
 
+  public T load(long id, Class<T> tClass){
+    String sql1 = selectBuilder(tClass);
+    Optional<T> optionalT = Optional.empty();
+    try {
+      optionalT = dbExecutor.selectRecord(connection, sql1, id, resultSet -> {
+        try {
+          if (resultSet.next()) {
+            return createObject(resultSet, tClass);//new User(resultSet.getLong("id"), resultSet.getString("name"), resultSet.getInt("age"));
+          }
+        } catch (SQLException e) {
+          logger.error(e.getMessage(), e);
+        }
+        return null;
+      });
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
 
-  void update(T objectData){};
+    }
+    return optionalT.orElse(null);
+  }
 
-  //void createOrUpdate(T objectData); // опционально.
+  private T createObject(ResultSet resultSet, Class<T> tClass) throws SQLException {
+    List<Field> fieldList = getFields(tClass);
+    Class<?>[] params = new Class<?>[fieldList.size()];
+    Object[] value = new Object[fieldList.size()];
 
+    for (int i = 0; i < fieldList.size(); i++){
+      params[i] = fieldList.get(i).getType();
+      value[i] = resultSet.getObject(i+1);
+    }
 
-  <T> T load(long id, Class<T> clazz){
+    try {
+      return tClass.getConstructor(params).newInstance(value);
+    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      e.printStackTrace();
+    }
     return null;
   }
 
-  private List<Field> getFields(T obejctData){
+  private List<Field> getFieldsObject(T objectData){
+    List<Field> result = new ArrayList<>();
+    return getFields(objectData.getClass());
+  }
+
+  private List<Field> getFields(Class<?> aClass){
     //TODO проверка на наличие поля id
     List<Field> result = new ArrayList<>();
-    Class<?> aClass = obejctData.getClass();
     Field[] fields = aClass.getDeclaredFields();
     int i = 0;
     result.add(0,null);
@@ -88,4 +125,24 @@ public class JdbcMapper<T> {
     return result;
   }
 
+  private String selectBuilder(Class<?> aClass) {
+    StringBuilder sql1 = new StringBuilder("select ");
+    String nameClass = aClass.getSimpleName().toLowerCase();
+
+    List<Field> fieldList = getFields(aClass);
+    for (int i = 0; i < fieldList.size(); i++) {
+      fieldList.get(i).setAccessible(true);
+      sql1.append(fieldList.get(i).getName());
+      if (i < fieldList.size() - 1) {
+        sql1.append(",");
+      }
+      fieldList.get(i).setAccessible(false);
+    }
+    sql1.append(" from ")
+            .append(nameClass)
+            .append(" where ")
+            .append(fieldList.get(0).getName())
+            .append(" = ?");
+    return sql1.toString();
+  }
 }

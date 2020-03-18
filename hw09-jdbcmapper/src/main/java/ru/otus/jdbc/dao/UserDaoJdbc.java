@@ -29,28 +29,15 @@ public class UserDaoJdbc implements UserDao {
 
   @Override
   public Optional<User> findById(long id) {
-    try {
-      return dbExecutor.selectRecord(getConnection(), "select id, name, age from user where id  = ?", id, resultSet -> {
-        try {
-          if (resultSet.next()) {
-            return new User(resultSet.getLong("id"), resultSet.getString("name"), resultSet.getInt("age"));
-          }
-        } catch (SQLException e) {
-          logger.error(e.getMessage(), e);
-        }
-        return null;
-      });
-    } catch (Exception e) {
-      logger.error(e.getMessage(), e);
-    }
-    return Optional.empty();
+    JdbcMapper<User> jdbcMapper = new JdbcMapper<>(dbExecutor, getConnection());
+    return Optional.of(jdbcMapper.load(id, User.class));
   }
 
 
   @Override
   public long saveUser(User user) {
     JdbcMapper<User> jdbcMapper = new JdbcMapper<>(dbExecutor, getConnection());
-    return jdbcMapper.create(user);
+     return jdbcMapper.create(user);
   }
 
   @Override

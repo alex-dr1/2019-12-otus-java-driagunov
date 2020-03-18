@@ -27,7 +27,7 @@ public class DbServiceAccountImpl implements DBServiceAccount {
         long userId = accountDao.saveAccount(account);
         sessionManager.commitSession();
 
-        logger.info("created user: {}", userId);
+        logger.info("created account: {}", userId);
         return userId;
       } catch (Exception e) {
         logger.error(e.getMessage(), e);

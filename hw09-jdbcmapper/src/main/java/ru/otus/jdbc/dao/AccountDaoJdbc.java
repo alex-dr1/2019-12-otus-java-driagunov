@@ -29,21 +29,8 @@ public class AccountDaoJdbc implements AccountDao {
 
   @Override
   public Optional<Account> findById(long id) {
-    try {
-      return dbExecutor.selectRecord(getConnection(), "select no, type, rest from account where no  = ?", id, resultSet -> {
-        try {
-          if (resultSet.next()) {
-            return new Account(resultSet.getLong("no"), resultSet.getString("type"), resultSet.getBigDecimal("rest"));
-          }
-        } catch (SQLException e) {
-          logger.error(e.getMessage(), e);
-        }
-        return null;
-      });
-    } catch (Exception e) {
-      logger.error(e.getMessage(), e);
-    }
-    return Optional.empty();
+    JdbcMapper<Account> jdbcMapper = new JdbcMapper<>(dbExecutor, getConnection());
+    return Optional.of(jdbcMapper.load(id, Account.class));
   }
 
 

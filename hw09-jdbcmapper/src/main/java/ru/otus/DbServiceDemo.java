@@ -30,54 +30,17 @@ import java.util.Optional;
 public class DbServiceDemo {
   private static Logger logger = LoggerFactory.getLogger(DbServiceDemo.class);
 
-  public static void main(String[] args) throws Exception {
-    DataSource dataSource = new DataSourceH2();
-    DbServiceDemo demo = new DbServiceDemo();
-
-    demo.createTableUser(dataSource);
-    demo.createTableAccount(dataSource);
-
-    SessionManagerJdbc sessionManager = new SessionManagerJdbc(dataSource);
-
-    DbExecutor<User> dbExecutor = new DbExecutor<>();
-    UserDao userDao = new UserDaoJdbc(sessionManager, dbExecutor);
-    DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
-
-    long id = dbServiceUser.saveUser(new User(0, "Alex",38));
-    Optional<User> user = dbServiceUser.getUser(id);
-
-     user.ifPresentOrElse(
-        crUser -> logger.info("created object:{}", user.get()),
-        () -> logger.info("object was not created")
-    );
-
-    DbExecutor<Account> dbExecutor2 = new DbExecutor<>();
-    AccountDao accountDao = new AccountDaoJdbc(sessionManager, dbExecutor2);
-    DBServiceAccount dbServiceAccount = new DbServiceAccountImpl(accountDao);
-
-    long id2 = dbServiceAccount.saveAccount(new Account(0, "AccountAlex",new BigDecimal("4643643438")));
-    Optional<Account> account = dbServiceAccount.getAccount(id2);
-
-    account.ifPresentOrElse(
-            crAccount -> logger.info("created object:{}", account.get()),
-            () -> logger.info("object was not created")
-    );
-
-  }
-
-  private void createTableUser(DataSource dataSource) throws SQLException {
+  public void createTableUser(DataSource dataSource) throws SQLException {
     try (Connection connection = dataSource.getConnection();
          PreparedStatement pst = connection.prepareStatement("create table user(id long not null auto_increment, name varchar(255), age int(3))")) {
       pst.executeUpdate();
     }
-    System.out.println("table user created ");
   }
 
-  private void createTableAccount(DataSource dataSource) throws SQLException {
+  public void createTableAccount(DataSource dataSource) throws SQLException {
     try (Connection connection = dataSource.getConnection();
          PreparedStatement pst = connection.prepareStatement("create table account(no long not null auto_increment, type varchar(255), rest number)")) {
       pst.executeUpdate();
     }
-    System.out.println("table account created");
   }
 }
