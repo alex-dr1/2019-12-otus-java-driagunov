@@ -37,5 +37,11 @@ public class DbServiceUserTest {
     long id0 = dbServiceUser.saveUser(user01);
     Optional<User> user02 = dbServiceUser.getUser(id0);
     assertEquals(user02.get(), user01);
+    System.out.println(user02.get());
+
+    User user21 = new User(1, "AlexUpdate",88);
+    dbServiceUser.updateUser(user21);
+    Optional<User> user22 = dbServiceUser.getUser(1);
+    System.out.println(user22.get());
   }
 }

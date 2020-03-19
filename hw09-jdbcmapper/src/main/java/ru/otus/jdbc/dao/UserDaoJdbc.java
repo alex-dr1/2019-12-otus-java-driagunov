@@ -41,6 +41,13 @@ public class UserDaoJdbc implements UserDao {
   }
 
   @Override
+  public void updateUser(User user) {
+    JdbcMapper<User> jdbcMapper = new JdbcMapper<>(dbExecutor, getConnection());
+    jdbcMapper.update(user);
+  }
+
+
+  @Override
   public SessionManager getSessionManager() {
     return sessionManager;
   }

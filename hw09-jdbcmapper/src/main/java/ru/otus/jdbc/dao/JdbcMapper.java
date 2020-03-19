@@ -61,6 +61,13 @@ public class JdbcMapper<T> {
     }
   }
 
+  public void update(T object){
+    try {
+      dbExecutor.updateRecord(connection, "UPDATE user SET name='UPDATEname', age=88 WHERE id = 1", new ArrayList<>());
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
   public T load(long id, Class<T> tClass){
     String sql1 = selectBuilder(tClass);
     Optional<T> optionalT = Optional.empty();
