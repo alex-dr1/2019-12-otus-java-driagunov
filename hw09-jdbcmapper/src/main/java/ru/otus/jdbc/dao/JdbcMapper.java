@@ -116,6 +116,7 @@ public class JdbcMapper<T> {
     //TODO проверка на наличие поля id
     List<Field> result = new ArrayList<>();
     Field[] fields = aClass.getDeclaredFields();
+    boolean isSetId = false;
     int i = 0;
     result.add(0,null);
     for (Field field: fields){
@@ -123,11 +124,17 @@ public class JdbcMapper<T> {
       if(field.isAnnotationPresent(Id.class)){
         result.remove(0);
         result.add(0, field);
+        isSetId = true;
       } else {
         i++;
         result.add(i, field);
       }
       field.setAccessible(false);
+    }
+    if (!isSetId){
+      Exception e = new RuntimeException("No key field");
+      logger.error(e.getMessage(), e);
+      throw new UserDaoException(e);
     }
     return result;
   }
