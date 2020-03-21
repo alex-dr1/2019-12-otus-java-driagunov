@@ -23,7 +23,8 @@ public class DbServiceUserTest {
   DbServiceDemo demo = new DbServiceDemo();
 
   DbExecutor<User> dbExecutor = new DbExecutor<>();
-  UserDao userDao = new UserDaoJdbc(sessionManager, dbExecutor);
+  Mapper<User> mapper = new Mapper<>();
+  UserDao userDao = new UserDaoJdbc(sessionManager, dbExecutor, mapper);
   DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
 
   @BeforeEach

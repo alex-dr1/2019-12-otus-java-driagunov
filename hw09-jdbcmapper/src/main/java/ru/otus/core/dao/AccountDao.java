@@ -11,5 +11,7 @@ public interface AccountDao {
 
   long saveAccount(Account account);
 
+  void updateAccount(Account account);
+
   SessionManager getSessionManager();
 }
