@@ -8,6 +8,7 @@ import ru.otus.core.dao.UserDaoException;
 import ru.otus.core.model.User;
 import ru.otus.core.sessionmanager.SessionManager;
 import ru.otus.jdbc.DbExecutor;
+import ru.otus.jdbc.mapper.Mapper;
 import ru.otus.jdbc.sessionmanager.SessionManagerJdbc;
 
 import java.sql.Connection;

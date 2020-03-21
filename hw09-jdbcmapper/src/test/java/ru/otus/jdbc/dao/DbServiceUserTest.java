@@ -9,6 +9,7 @@ import ru.otus.core.service.DBServiceUser;
 import ru.otus.core.service.DbServiceUserImpl;
 import ru.otus.h2.DataSourceH2;
 import ru.otus.jdbc.DbExecutor;
+import ru.otus.jdbc.mapper.Mapper;
 import ru.otus.jdbc.sessionmanager.SessionManagerJdbc;
 
 import javax.sql.DataSource;

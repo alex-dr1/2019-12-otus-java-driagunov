@@ -1,25 +1,25 @@
-package ru.otus.jdbc.dao;
+package ru.otus.jdbc.mapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.core.dao.UserDaoException;
 import ru.otus.core.model.Id;
-import ru.otus.jdbc.DbExecutor;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Mapper<T> {
   private static Logger logger = LoggerFactory.getLogger(Mapper.class);
+  private List<String> paramsList = new ArrayList<>();
+
+  public Mapper() {
+  }
 
   public List<String> getParamsList(T objectData){
-
     List<Field> fieldList = getFieldsObject(objectData);
     List<String> paramsList = new ArrayList<>();
 

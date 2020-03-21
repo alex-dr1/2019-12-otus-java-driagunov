@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import ru.otus.DbServiceDemo;
 import ru.otus.core.dao.AccountDao;
 import ru.otus.core.model.Account;
-import ru.otus.core.model.User;
 import ru.otus.core.service.DBServiceAccount;
 import ru.otus.core.service.DbServiceAccountImpl;
 import ru.otus.h2.DataSourceH2;
 import ru.otus.jdbc.DbExecutor;
+import ru.otus.jdbc.mapper.Mapper;
 import ru.otus.jdbc.sessionmanager.SessionManagerJdbc;
 
 import javax.sql.DataSource;
