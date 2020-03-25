@@ -21,3 +21,4 @@ OpenJDK 64-Bit Server VM (build 11.0.5+10-post-Ubuntu-0ubuntu1.118.04, mixed mod
 7. <a href="/hw07-department">Департамент ATM</a>
 8. <a href="/hw08-serialization">Cвой json object writer</a>
 9. <a href="/hw09-jdbcmapper">Самодельный ORM</a>
+10. <a href="/hw10-hibernate">Использование Hibernate</a>
