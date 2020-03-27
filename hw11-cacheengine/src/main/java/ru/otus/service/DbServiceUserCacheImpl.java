@@ -83,12 +83,4 @@ public class DbServiceUserCacheImpl implements DBServiceUser {
       return Optional.empty();
     }
   }
-
-  private void addListenerCache(){
-
-  }
-
-  private void removeListenerCache(){
-
-  }
 }

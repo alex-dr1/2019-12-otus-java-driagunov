@@ -1,24 +1,21 @@
 package ru.otus;
 
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.otus.core.dao.UserDao;
 import ru.otus.core.model.Address;
 import ru.otus.core.model.Phone;
 import ru.otus.core.model.User;
 import ru.otus.core.service.DBServiceUser;
-import ru.otus.core.service.DbServiceUserImpl;
 import ru.otus.hibernate.HibernateUtils;
 import ru.otus.hibernate.dao.UserDaoHibernate;
 import ru.otus.hibernate.sessionmanager.SessionManagerHibernate;
 import ru.otus.service.DbServiceUserCacheImpl;
 
 import java.util.List;
-import java.util.Optional;
+
 
 public class DbServiceCacheDemo {
-  private static Logger logger = LoggerFactory.getLogger(DbServiceDemo.class);
+
 
   public static void main(String[] args) {
 
