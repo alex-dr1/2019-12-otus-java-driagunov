@@ -2,6 +2,9 @@ package ru.otus.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.otus.cachehw.HwCache;
+import ru.otus.cachehw.HwListener;
+import ru.otus.cachehw.MyCache;
 import ru.otus.core.dao.UserDao;
 import ru.otus.core.model.User;
 import ru.otus.core.service.DBServiceUser;
@@ -14,9 +17,19 @@ public class DbServiceUserCacheImpl implements DBServiceUser {
   private static Logger logger = LoggerFactory.getLogger(DbServiceUserCacheImpl.class);
 
   private final UserDao userDao;
+  private HwCache<Long, User> cache = new MyCache<>();
+  private HwListener<Long, User> listener;
 
   public DbServiceUserCacheImpl(UserDao userDao) {
     this.userDao = userDao;
+
+    listener = new HwListener<Long, User>() {
+      @Override
+      public void notify(Long key, User value, String action) {
+        logger.info("{}==>>> key:{}, value:{}", action, key, value);
+      }
+    };
+
   }
 
   @Override
@@ -40,18 +53,42 @@ public class DbServiceUserCacheImpl implements DBServiceUser {
 
   @Override
   public Optional<User> getUser(long id) {
+    cache.addListener(listener);
+    User userCache = cache.get(id);
+    if (userCache == null){
+      Optional<User> userDB = getUserDB(id);
+      userDB.ifPresent(user -> cache.put(id, user));
+      logger.info("getUserDB and putUserCache");
+      cache.removeListener(listener);
+      return userDB;
+    }else{
+      logger.info("getUserCache");
+      cache.removeListener(listener);
+      return Optional.of(userCache);
+    }
+  }
+
+  private Optional<User> getUserDB(long id){
     try (SessionManager sessionManager = userDao.getSessionManager()) {
       sessionManager.beginSession();
       try {
         Optional<User> userOptional = userDao.findById(id);
 
-        logger.info("user: {}", userOptional.orElse(null));
+        logger.info("getUser: {}", userOptional.orElse(null));
         return userOptional;
-      } catch (Exception e) {
+      } catch (DbServiceException e) {
         logger.error(e.getMessage(), e);
         sessionManager.rollbackSession();
       }
       return Optional.empty();
     }
+  }
+
+  private void addListenerCache(){
+
+  }
+
+  private void removeListenerCache(){
+
   }
 }

@@ -28,7 +28,7 @@ public class UserDaoHibernate implements UserDao {
     DatabaseSessionHibernate currentSession = sessionManager.getCurrentSession();
     try {
       return Optional.ofNullable(currentSession.getHibernateSession().find(User.class, id));
-    } catch (Exception e) {
+    } catch (UserDaoException e) {
       logger.error(e.getMessage(), e);
     }
     return Optional.empty();

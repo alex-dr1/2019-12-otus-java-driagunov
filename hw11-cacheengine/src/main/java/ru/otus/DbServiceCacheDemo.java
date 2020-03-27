@@ -34,13 +34,18 @@ public class DbServiceCacheDemo {
     User lusia = createUser("Люся Педалькина", "ЕКАТЕРИНБУРГ", "+79890238256", "+743382752930");
 
     long id1 = dbServiceUser.saveUser(vasia);
-    Optional<User> mayBeCreatedVasia = dbServiceUser.getUser(id1);
-
     long id2 = dbServiceUser.saveUser(lusia);
-    Optional<User> mayBeCreateLusia = dbServiceUser.getUser(id2);
+    System.out.println("================================================");
 
-    outputUserOptional("Created Vasia", mayBeCreatedVasia);
-    outputUserOptional("Created Lusia", mayBeCreateLusia);
+    System.out.println(dbServiceUser.getUser(id1));
+    System.out.println(dbServiceUser.getUser(id1));
+    System.out.println(dbServiceUser.getUser(id1));
+
+
+    System.out.println(dbServiceUser.getUser(id2));
+    System.out.println(dbServiceUser.getUser(id2));
+    System.out.println(dbServiceUser.getUser(id2));
+
   }
 
   private static User createUser(String name, String address, String phone1, String phone2) {
@@ -54,9 +59,5 @@ public class DbServiceCacheDemo {
     return user;
   }
 
-  private static void outputUserOptional(String header, Optional<User> mayBeUser) {
-    System.out.println("-----------------------------------------------------------");
-    System.out.println(header);
-    mayBeUser.ifPresentOrElse(System.out::println, () -> logger.info("User not found"));
-  }
+
 }
