@@ -3,8 +3,7 @@ package ru.otus.cachehw;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.*;
 
 public class MyCache<K, V> implements HwCache<K, V> {
   private static final Logger logger = LoggerFactory.getLogger(MyCache.class);
@@ -55,14 +54,6 @@ public class MyCache<K, V> implements HwCache<K, V> {
   @Override
   public void removeListener(HwListener<K, V> listener) {
     this.listener = null;
-  }
-
-  public void printCache(){
-
-    System.out.println("+-----------------------------+");
-    System.out.print("Map(size " + cacheWeakMap.size() + "): ");
-    cacheWeakMap.forEach((k, v) -> System.out.println(k+"="+v));
-    System.out.println();
   }
 
   private String keyToStringHash(K key){
