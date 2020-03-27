@@ -31,6 +31,7 @@
         <module>hw08-serialization</module>
         <module>hw09-jdbcmapper</module>
         <module>hw10-hibernate</module>
+        <module>hw11-cacheengine</module>
     </modules>
 
     <properties>
