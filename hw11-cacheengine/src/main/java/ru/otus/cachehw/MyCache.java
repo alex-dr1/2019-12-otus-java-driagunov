@@ -7,7 +7,7 @@ import java.util.*;
 
 public class MyCache<K, V> implements HwCache<K, V> {
   private static final Logger logger = LoggerFactory.getLogger(MyCache.class);
-  private HwListener<K, V> listener;
+  private List<HwListener<K, V>> listenerList = new ArrayList<>();
   private Map<String, V> cacheWeakMap = new WeakHashMap<>();
 
 
@@ -17,28 +17,24 @@ public class MyCache<K, V> implements HwCache<K, V> {
 
   @Override
   public void put(K key, V value) {
-    if(listener == null){
-      logger.error("listener should not be empty");
-      return;
-    }
-
     if(get(key) != null){
       remove(key);
     }
     cacheWeakMap.put(keyToStringHash(key),value);
 
-    listener.notify(key, value, "add to cache");
+    for (HwListener<K, V> listener: listenerList){
+      listener.notify(key, value, "add to cache");
+    }
   }
 
   @Override
   public void remove(K key) {
-    if(listener == null){
-      logger.error("listener should not be empty");
-      return;
-    }
-
     cacheWeakMap.remove(keyToStringHash(key));
-    listener.notify(key, this.get(key), "removed from cache");
+
+    V value = this.get(key);
+    for (HwListener<K, V> listener: listenerList){
+      listener.notify(key, value, "removed from cache");
+    }
   }
 
   @Override
@@ -48,12 +44,12 @@ public class MyCache<K, V> implements HwCache<K, V> {
 
   @Override
   public void addListener(HwListener<K, V> listener) {
-    this.listener = listener;
+    this.listenerList.add(listener);
   }
 
   @Override
   public void removeListener(HwListener<K, V> listener) {
-    this.listener = null;
+    this.listenerList.remove(listener);
   }
 
   private String keyToStringHash(K key){
