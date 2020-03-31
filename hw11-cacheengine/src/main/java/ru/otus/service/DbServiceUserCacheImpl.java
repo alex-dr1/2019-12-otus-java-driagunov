@@ -40,6 +40,10 @@ public class DbServiceUserCacheImpl implements DBServiceUser {
         long userId = userDao.saveUser(user);
         sessionManager.commitSession();
 
+        cache.addListener(listener);
+        cache.put(userId, user);
+        cache.removeListener(listener);
+
         logger.info("created user: {}", userId);
         return userId;
       } catch (Exception e) {

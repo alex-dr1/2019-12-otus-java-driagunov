@@ -17,9 +17,6 @@ public class MyCache<K, V> implements HwCache<K, V> {
 
   @Override
   public void put(K key, V value) {
-    if(get(key) != null){
-      remove(key);
-    }
     cacheWeakMap.put(keyToStringHash(key),value);
 
     for (HwListener<K, V> listener: listenerList){
@@ -29,12 +26,12 @@ public class MyCache<K, V> implements HwCache<K, V> {
 
   @Override
   public void remove(K key) {
-    cacheWeakMap.remove(keyToStringHash(key));
-
     V value = this.get(key);
     for (HwListener<K, V> listener: listenerList){
       listener.notify(key, value, "removed from cache");
     }
+
+    cacheWeakMap.remove(keyToStringHash(key));
   }
 
   @Override
