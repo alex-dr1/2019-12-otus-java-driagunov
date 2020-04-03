@@ -7,8 +7,8 @@ import ru.otus.cachehw.HwListener;
 import ru.otus.cachehw.MyCache;
 import ru.otus.core.dao.UserDao;
 import ru.otus.core.model.User;
-import ru.otus.core.service.DBServiceUser;
-import ru.otus.core.service.DbServiceException;
+import ru.otus.core.dbservice.DBServiceUser;
+import ru.otus.core.dbservice.DbServiceException;
 import ru.otus.core.sessionmanager.SessionManager;
 
 import java.util.Optional;
