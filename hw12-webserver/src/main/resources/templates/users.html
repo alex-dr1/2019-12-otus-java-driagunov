@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Пользователи</title>
+    <script type="text/javascript">
+		function createInputTelephones(){
+			const boxTelephones = document.getElementById('box_telephones');
+			boxTelephones.innerHTML = boxTelephones.innerHTML + "<label>Телефон:<input type=\"text\" name = \"telephone\" value=\"\"></label><br/>";
+		}
+	</script>
+</head>
+
+<body>
+
+<form action="" method="POST">
+    <label>Имя:<input type="text" name = "name" value=""></label><br/>
+    <label>Логин:<input type="text" name = "login" value=""></label><br/>
+    <label>Пароль:<input type="text" name = "pass" value=""></label><br/>
+    <label>Адресс:<input type="text" name = "address" value=""></label><br/>
+    <label>Телефон:<input type="text" name = "telephone" value=""></label><br/>
+
+    <div id="box_telephones"></div>
+    <button type="button" onclick="createInputTelephones()">Добавить телефон</button>
+    <br/>
+    <button type="submit">Создать пользователя</button>
+</form>
+
+
+<h4>Пользователи</h4>
+<table style="width: 400px">
+    <thead>
+        <tr>
+            <td style="width: 50px">Id</td>
+            <td style="width: 150px">Имя</td>
+            <td style="width: 100px">Логин</td>
+            <td style="width: 100px">Пароль</td>
+        </tr>
+    </thead>
+    <tbody>
+        <#list users as key, value>
+        <tr>
+            <td>${value.id}</td>
+            <td>${value.name}</td>
+            <td>${value.login}</td>
+            <td>${value.password}</td>
+        </tr>
+        </#list>
+    </tbody>
+</table>
+</body>
+</html>
