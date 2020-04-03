@@ -6,9 +6,11 @@ import ru.otus.core.dao.UserDao;
 import ru.otus.core.model.User;
 import ru.otus.core.sessionmanager.SessionManager;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DbServiceUserImpl implements DBServiceUser {
   private static Logger logger = LoggerFactory.getLogger(DbServiceUserImpl.class);
@@ -59,8 +61,7 @@ public class DbServiceUserImpl implements DBServiceUser {
       sessionManager.beginSession();
       try {
         List<User> userList = userDao.getAllUsers();
-        userList.forEach(System.out::println);
-        return Map.of();
+        return userList.stream().collect(Collectors.toMap(User::getId, user -> user, (a, b) -> b));
       } catch (Exception e) {
         logger.error(e.getMessage(), e);
         sessionManager.rollbackSession();

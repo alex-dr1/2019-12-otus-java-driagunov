@@ -13,6 +13,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.security.Constraint;
 import ru.otus.core.dao.UserDao;
+import ru.otus.core.dbservice.DBServiceUser;
 import ru.otus.core.helpers.FileSystemHelper;
 import ru.otus.core.templates.TemplateProcessor;
 import ru.otus.core.servlet.UsersServlet;
@@ -30,19 +31,16 @@ public class UsersWebServerImpl implements UsersWebServer {
 
     private final LoginService loginService;
 
-    private final UserDao userDao;
-    private final Gson gson;
+    private final DBServiceUser dbServiceUser;
     protected final TemplateProcessor templateProcessor;
     private final Server server;
 
     public UsersWebServerImpl(int port,
                               LoginService loginService,
-                              UserDao userDao,
-                              Gson gson,
+                              DBServiceUser dbServiceUser,
                               TemplateProcessor templateProcessor) {
         this.loginService = loginService;
-        this.userDao = userDao;
-        this.gson = gson;
+        this.dbServiceUser = dbServiceUser;
         this.templateProcessor = templateProcessor;
         server = new Server(port);
     }
@@ -115,7 +113,7 @@ public class UsersWebServerImpl implements UsersWebServer {
 
     private ServletContextHandler createServletContextHandler() {
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        servletContextHandler.addServlet(new ServletHolder(new UsersServlet(templateProcessor, userDao)), "/users");
+        servletContextHandler.addServlet(new ServletHolder(new UsersServlet(templateProcessor, dbServiceUser)), "/users");
         return servletContextHandler;
     }
 }

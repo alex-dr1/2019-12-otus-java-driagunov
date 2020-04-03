@@ -45,6 +45,8 @@ public class WebServer {
         User vasia = createUser("Вася Пупкин", "НИЖНИЙ ТАГИЛ", "+72390423094", "+5324343433");
         User lusia = createUser("Люся Педалькина", "ЕКАТЕРИНБУРГ", "+79890238256", "+743382752930");
 
+        dbServiceUser.saveUser(vasia);
+        dbServiceUser.saveUser(lusia);
 
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
 
@@ -52,7 +54,7 @@ public class WebServer {
         LoginService loginService = new HashLoginService(REALM_NAME, hashLoginServiceConfigPath);
 
         UsersWebServer usersWebServer = new UsersWebServerImpl(WEB_SERVER_PORT,
-                loginService, userDao, gson, templateProcessor);
+                loginService, dbServiceUser, templateProcessor);
 
         usersWebServer.start();
         usersWebServer.join();
