@@ -1,6 +1,8 @@
 package ru.otus.servlet;
 
 import ru.otus.dao.UserDao;
+import ru.otus.model.Address;
+import ru.otus.model.Phone;
 import ru.otus.model.User;
 import ru.otus.services.TemplateProcessor;
 
@@ -9,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -40,13 +44,24 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pName = request.getParameter("name");
-        String pLogin = request.getParameter("login");
-        String pPass = request.getParameter("pass");
         String pAddress = request.getParameter("address");
         String[] pTelephones = request.getParameterValues("telephone");
 
         long size = userDao.getAllUsers().size();
-        User user = new User(size+1, pName, pLogin, pPass);
+
+        User user = new User();
+        user.setId(size+1);
+        user.setName(pName);
+        Address addressUser = new Address(pAddress, user);
+        user.setAddress(addressUser);
+
+        List<Phone> phoneList = new ArrayList<>();
+        for (String tel: pTelephones){
+            phoneList.add(new Phone(tel, user));
+        }
+
+        user.setPhones(phoneList);
+        System.out.println(user);
         userDao.saveUser(user);
         doGet(request, response);
     }

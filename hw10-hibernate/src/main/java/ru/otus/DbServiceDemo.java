@@ -31,8 +31,6 @@ public class DbServiceDemo {
 
     User vasia = createUser("Вася Пупкин", "НИЖНИЙ ТАГИЛ", "+72390423094", "+5324343433");
     User lusia = createUser("Люся Педалькина", "ЕКАТЕРИНБУРГ", "+79890238256", "+743382752930");
-    User test = new User();
-    test.setName("test");
 
     long id1 = dbServiceUser.saveUser(vasia);
     Optional<User> mayBeCreatedVasia = dbServiceUser.getUser(id1);
@@ -40,13 +38,8 @@ public class DbServiceDemo {
     long id2 = dbServiceUser.saveUser(lusia);
     Optional<User> mayBeCreateLusia = dbServiceUser.getUser(id2);
 
-    long id3 = dbServiceUser.saveUser(test);
-    Optional<User> mayBeCreateTest = dbServiceUser.getUser(id3);
-
     outputUserOptional("Created Vasia", mayBeCreatedVasia);
     outputUserOptional("Created Lusia", mayBeCreateLusia);
-
-    outputUserOptional("Test", mayBeCreateTest);
   }
 
   private static User createUser(String name, String address, String phone1, String phone2) {

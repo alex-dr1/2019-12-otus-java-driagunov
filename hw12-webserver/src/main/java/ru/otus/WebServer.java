@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.security.LoginService;
-import ru.otus.dao.InMemoryUserDao;
+import ru.otus.dao.UserDaoImpl;
 import ru.otus.dao.UserDao;
 import ru.otus.helpers.FileSystemHelper;
 import ru.otus.server.UsersWebServer;
@@ -16,6 +16,9 @@ import ru.otus.services.TemplateProcessorImpl;
     // Стартовая страница
     http://localhost:8080
 
+    login: admin
+    password: 11111
+
 */
 public class WebServer {
     private static final int WEB_SERVER_PORT = 8080;
@@ -24,7 +27,7 @@ public class WebServer {
     private static final String REALM_NAME = "Password";
 
     public static void main(String[] args) throws Exception {
-        UserDao userDao = new InMemoryUserDao();
+        UserDao userDao = new UserDaoImpl();
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
 

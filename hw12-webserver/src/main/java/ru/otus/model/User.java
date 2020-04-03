@@ -1,34 +1,69 @@
 package ru.otus.model;
 
+
+//import javax.persistence.*;
+import java.util.List;
+
+//@Entity
+//@Table(name = "tUsers")
 public class User {
 
-    private final long id;
-    private final String name;
-    private final String login;
-    private final String password;
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//  @Column(name = "user_id")
+  private long id;
 
-    public User(long id, String name, String login, String password) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.password = password;
-    }
+//  @Column(name = "name", nullable = false)
+  private String name;
 
-    public long getId() {
-        return id;
-    }
+//  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Address address;
 
-    public String getName() {
-        return name;
-    }
+//  @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Phone> phones;
 
-    public String getLogin() {
-        return login;
-    }
+  public User() {
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public long getId() {
+    return id;
+  }
 
+  public void setId(long id) {
+    this.id = id;
+  }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  public List<Phone> getPhones() {
+    return phones;
+  }
+
+  public void setPhones(List<Phone> phones) {
+    this.phones = phones;
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", address=" + address +
+            ", phones=" + phones +
+            '}';
+  }
 }

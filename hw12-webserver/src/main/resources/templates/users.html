@@ -1,6 +1,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Пользователи</title>
+    <style>
+       table {
+        border: 4px double black; /* Рамка вокруг таблицы */
+        border-collapse: collapse; /* Отображать только одинарные линии */
+       }
+       th {
+        text-align: left; /* Выравнивание по левому краю */
+        background: #ccc; /* Цвет фона ячеек */
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+       }
+       td {
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+       }
+  </style>
     <script type="text/javascript">
 		function createInputTelephones(){
 			const boxTelephones = document.getElementById('box_telephones');
@@ -13,8 +29,6 @@
 
 <form action="" method="POST">
     <label>Имя:<input type="text" name = "name" value=""></label><br/>
-    <label>Логин:<input type="text" name = "login" value=""></label><br/>
-    <label>Пароль:<input type="text" name = "pass" value=""></label><br/>
     <label>Адресс:<input type="text" name = "address" value=""></label><br/>
     <label>Телефон:<input type="text" name = "telephone" value=""></label><br/>
 
@@ -26,13 +40,13 @@
 
 
 <h4>Пользователи</h4>
-<table style="width: 400px">
+<table border="1" >
     <thead>
         <tr>
             <td style="width: 50px">Id</td>
             <td style="width: 150px">Имя</td>
-            <td style="width: 100px">Логин</td>
-            <td style="width: 100px">Пароль</td>
+            <td style="width: 100px">Адрес</td>
+            <td style="width: 100px">Телефон</td>
         </tr>
     </thead>
     <tbody>
@@ -40,8 +54,14 @@
         <tr>
             <td>${value.id}</td>
             <td>${value.name}</td>
-            <td>${value.login}</td>
-            <td>${value.password}</td>
+            <td>
+                ${value.address.street}
+            </td>
+            <td>
+                <#list value.phones as value1>
+                    ${value1.number}<br/>
+                </#list>
+            </td>
         </tr>
         </#list>
     </tbody>
