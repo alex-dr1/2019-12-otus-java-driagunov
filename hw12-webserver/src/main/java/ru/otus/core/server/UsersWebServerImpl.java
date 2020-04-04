@@ -1,6 +1,5 @@
 package ru.otus.core.server;
 
-import com.google.gson.Gson;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.LoginService;
@@ -12,7 +11,6 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.security.Constraint;
-import ru.otus.core.dao.UserDao;
 import ru.otus.core.dbservice.DBServiceUser;
 import ru.otus.core.helpers.FileSystemHelper;
 import ru.otus.core.templates.TemplateProcessor;

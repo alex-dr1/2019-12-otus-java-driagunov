@@ -1,6 +1,5 @@
 package ru.otus.core.servlet;
 
-import ru.otus.core.dao.UserDao;
 import ru.otus.core.dbservice.DBServiceUser;
 import ru.otus.core.model.Address;
 import ru.otus.core.model.Phone;

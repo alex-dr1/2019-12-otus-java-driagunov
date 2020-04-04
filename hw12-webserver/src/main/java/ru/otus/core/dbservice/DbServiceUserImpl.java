@@ -6,7 +6,6 @@ import ru.otus.core.dao.UserDao;
 import ru.otus.core.model.User;
 import ru.otus.core.sessionmanager.SessionManager;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
