@@ -1,11 +1,9 @@
-package ru.otus.core.service;
+package ru.otus.core.dbservice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.core.dao.AccountDao;
-import ru.otus.core.dao.UserDao;
 import ru.otus.core.model.Account;
-import ru.otus.core.model.User;
 import ru.otus.core.sessionmanager.SessionManager;
 
 import java.util.Optional;

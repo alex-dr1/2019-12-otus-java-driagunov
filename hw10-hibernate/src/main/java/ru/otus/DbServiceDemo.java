@@ -7,8 +7,8 @@ import ru.otus.core.dao.UserDao;
 import ru.otus.core.model.Address;
 import ru.otus.core.model.Phone;
 import ru.otus.core.model.User;
-import ru.otus.core.service.DBServiceUser;
-import ru.otus.core.service.DbServiceUserImpl;
+import ru.otus.core.dbservice.DBServiceUser;
+import ru.otus.core.dbservice.DbServiceUserImpl;
 import ru.otus.hibernate.HibernateUtils;
 import ru.otus.hibernate.dao.UserDaoHibernate;
 import ru.otus.hibernate.sessionmanager.SessionManagerHibernate;
@@ -29,8 +29,8 @@ public class DbServiceDemo {
     DBServiceUser dbServiceUser = new DbServiceUserImpl(userDao);
 
 
-    User vasia = createUser("Вася Пупкин", "НИЖНИЙ ТАГИЛ", "+72390423094", "+5324343433");
-    User lusia = createUser("Люся Педалькина", "ЕКАТЕРИНБУРГ", "+79890238256", "+743382752930");
+    User vasia = createUser("Вася Пупкин", "ул. Ленина", "+72390423094", "+5324343433");
+    User lusia = createUser("Люся Педалькина", "ул. Мира", "+79890238256", "+743382752930");
 
     long id1 = dbServiceUser.saveUser(vasia);
     Optional<User> mayBeCreatedVasia = dbServiceUser.getUser(id1);

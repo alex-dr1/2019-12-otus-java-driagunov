@@ -1,7 +1,6 @@
-package ru.otus.core.service;
+package ru.otus.core.dbservice;
 
 import ru.otus.core.model.Account;
-import ru.otus.core.model.User;
 
 import java.util.Optional;
 
