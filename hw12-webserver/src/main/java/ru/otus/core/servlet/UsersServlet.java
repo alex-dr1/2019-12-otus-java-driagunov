@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class UsersServlet extends HttpServlet {
 
     private static final String USERS_PAGE_TEMPLATE = "users.html";
+    private static final String TEMPLATE_ATTR_ALL_USER = "users";
 
     private final DBServiceUser dbServiceUser;
     private final TemplateProcessor templateProcessor;
@@ -33,7 +34,7 @@ public class UsersServlet extends HttpServlet {
         Map<Long, User> allUsers = dbServiceUser.getAllUser();
         Map<String, Object> usersTemplate = new HashMap<>();
 
-        usersTemplate.put("users", allUsers);
+        usersTemplate.put(TEMPLATE_ATTR_ALL_USER, allUsers);
 
         response.setContentType("text/html");
         response.getWriter().println(templateProcessor.getPage(USERS_PAGE_TEMPLATE, usersTemplate));
@@ -46,7 +47,7 @@ public class UsersServlet extends HttpServlet {
         String[] pTelephones = request.getParameterValues("telephone");
 
         User user = createUser(pName, pAddress, pTelephones);
-//        System.out.println(user);
+
         dbServiceUser.saveUser(user);
         doGet(request, response);
     }

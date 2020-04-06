@@ -40,15 +40,11 @@ public class WebServer {
 
     public static void main(String[] args) throws Exception {
 
-        DBServiceUser dbServiceUser = createDbServiceUser();
+      DBServiceUser dbServiceUser = createDbServiceUser();
 
-        User vasia = createUser("Вася Пупкин", "НИЖНИЙ ТАГИЛ", "+72390423094", "+5324343433");
-        User lusia = createUser("Люся Педалькина", "ЕКАТЕРИНБУРГ", "+79890238256", "+743382752930");
+      DataBaseInitializer(dbServiceUser);
 
-        dbServiceUser.saveUser(vasia);
-        dbServiceUser.saveUser(lusia);
-
-        TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
+      TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
 
         String hashLoginServiceConfigPath = FileSystemHelper.localFileNameOrResourceNameToFullPath(HASH_LOGIN_SERVICE_CONFIG_NAME);
         LoginService loginService = new HashLoginService(REALM_NAME, hashLoginServiceConfigPath);
@@ -60,7 +56,15 @@ public class WebServer {
         usersWebServer.join();
     }
 
-    private static DBServiceUser createDbServiceUser() {
+  private static void DataBaseInitializer(DBServiceUser dbServiceUser) {
+    User vasia = createUser("Вася Пупкин", "НИЖНИЙ ТАГИЛ", "+72390423094", "+5324343433");
+    User lusia = createUser("Люся Педалькина", "ЕКАТЕРИНБУРГ", "+79890238256", "+743382752930");
+
+    dbServiceUser.saveUser(vasia);
+    dbServiceUser.saveUser(lusia);
+  }
+
+  private static DBServiceUser createDbServiceUser() {
         Class<?>[] annotatedClasses = {User.class, Address.class, Phone.class};
         SessionFactory sessionFactory = HibernateUtils.buildSessionFactory("hibernate.cfg.xml", annotatedClasses);
 
