@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create user</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+		function createInputTelephones(){
+			const boxTelephones = document.getElementById('box_telephones');
+			boxTelephones.innerHTML = boxTelephones.innerHTML + "<div class=\"row\"><label for=\"input-phones\">Phone:</label><input id=\"input-phones\" type=\"text\" name = \"phones\" value=\"\"></div>";
+		}
+	</script>
+
+</head>
+<body>
+
+<form id="create-form" th:action="@{/user/save}" th:method="post" accept-charset="utf-8">
+    <h1>New User:</h1>
+
+    <div class="row">
+        <label for="input-name">Name:</label>
+        <input id="input-name" name="name" type="text"  value=""/>
+    </div>
+
+    <div class="row">
+        <label for="input-street">Address:</label>
+        <input id="input-street" name="street" type="text" value=""/>
+    </div>
+    <div id="box_telephones"></div>
+    <div class="row">
+        <label for="input-phones">Phone:</label>
+        <input id="input-phones" type="text" name = "phones" value="">
+    <button type="button" onclick="createInputTelephones()">Add phone</button>
+    </div>
+    <div class="row">
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+</body>
+</html>
