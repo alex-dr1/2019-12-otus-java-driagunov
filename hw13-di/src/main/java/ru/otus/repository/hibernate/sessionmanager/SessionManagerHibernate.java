@@ -9,7 +9,7 @@ import ru.otus.repository.model.Address;
 import ru.otus.repository.model.Phone;
 import ru.otus.repository.model.User;
 
-@Component
+
 public class SessionManagerHibernate implements SessionManager {
 
   private DatabaseSessionHibernate databaseSession;

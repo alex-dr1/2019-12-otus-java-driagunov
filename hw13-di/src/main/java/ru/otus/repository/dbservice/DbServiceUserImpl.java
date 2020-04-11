@@ -2,17 +2,15 @@ package ru.otus.repository.dbservice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import ru.otus.repository.dao.UserDao;
-import ru.otus.repository.model.Address;
-import ru.otus.repository.model.Phone;
 import ru.otus.repository.model.User;
 import ru.otus.repository.hibernate.sessionmanager.SessionManager;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Service
 public class DbServiceUserImpl implements DBServiceUser {
   private static Logger logger = LoggerFactory.getLogger(DbServiceUserImpl.class);
 
@@ -20,7 +18,6 @@ public class DbServiceUserImpl implements DBServiceUser {
 
   public DbServiceUserImpl(UserDao userDao) {
     this.userDao = userDao;
-    dataBaseInitializer();
   }
 
   @Override
@@ -69,24 +66,5 @@ public class DbServiceUserImpl implements DBServiceUser {
       }
       return List.of();
     }
-  }
-
-  private void dataBaseInitializer() {
-    User vasia = createUser("Вася Пупкин", "ул. Ленина", "+72390423094", "+5324343433");
-    User lusia = createUser("Люся Педалькина", "пр. Мира", "+79890238256", "+743382752930");
-
-    this.saveUser(vasia);
-    this.saveUser(lusia);
-  }
-
-  private User createUser(String name, String address, String phone1, String phone2) {
-    User user = new User();
-    user.setName(name);
-    Address addressUser = new Address(address, user);
-    Phone phone1User = new Phone(phone1, user);
-    Phone phone2User = new Phone(phone2, user);
-    user.setAddress(addressUser);
-    user.setPhones(List.of(phone1User, phone2User));
-    return user;
   }
 }

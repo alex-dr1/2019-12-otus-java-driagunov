@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.otus.repository.model.User;
 import ru.otus.repository.hibernate.sessionmanager.SessionManager;
 import ru.otus.repository.hibernate.sessionmanager.DatabaseSessionHibernate;
@@ -15,7 +15,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class UserDaoHibernate implements UserDao {
   private static Logger logger = LoggerFactory.getLogger(UserDaoHibernate.class);
 
@@ -37,7 +37,6 @@ public class UserDaoHibernate implements UserDao {
     }
     return Optional.empty();
   }
-
 
   @Override
   public long saveUser(User user) {
