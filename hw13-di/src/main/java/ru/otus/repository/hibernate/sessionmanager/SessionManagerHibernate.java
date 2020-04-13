@@ -4,23 +4,20 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.otus.repository.hibernate.HibernateUtils;
 import ru.otus.repository.model.Address;
 import ru.otus.repository.model.Phone;
 import ru.otus.repository.model.User;
 
-
+@Service
 public class SessionManagerHibernate implements SessionManager {
 
   private DatabaseSessionHibernate databaseSession;
   private final SessionFactory sessionFactory;
 
-  public SessionManagerHibernate() {
+  public SessionManagerHibernate(SessionFactory sessionFactory) {
     Class<?>[] annotatedClasses = {User.class, Address.class, Phone.class};
-    SessionFactory sessionFactory = HibernateUtils.buildSessionFactory("hibernate.cfg.xml", annotatedClasses);
-    if (sessionFactory == null) {
-      throw new SessionManagerException("SessionFactory is null");
-    }
     this.sessionFactory = sessionFactory;
   }
 
