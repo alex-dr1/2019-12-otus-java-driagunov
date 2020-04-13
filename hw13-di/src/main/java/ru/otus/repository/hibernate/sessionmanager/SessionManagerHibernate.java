@@ -17,7 +17,6 @@ public class SessionManagerHibernate implements SessionManager {
   private final SessionFactory sessionFactory;
 
   public SessionManagerHibernate(SessionFactory sessionFactory) {
-    Class<?>[] annotatedClasses = {User.class, Address.class, Phone.class};
     this.sessionFactory = sessionFactory;
   }
 
