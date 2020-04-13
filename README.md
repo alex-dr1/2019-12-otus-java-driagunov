@@ -4,13 +4,6 @@
 #### Студент
 Дрягунов Александр<br>
 
-OS: Ubuntu 18.04 LTS<br>
-
-$java --version<br>
-openjdk 11.0.5 2019-10-15<br>
-OpenJDK Runtime Environment (build 11.0.5+10-post-Ubuntu-0ubuntu1.118.04)<br>
-OpenJDK 64-Bit Server VM (build 11.0.5+10-post-Ubuntu-0ubuntu1.118.04, mixed mode, sharing)<br>
-
 #### Список ДЗ
 1. <a href="/hw01-maven">Проект maven с модульной структурой</a>
 2. <a href="/hw02">Написать свою реализацию ArrayList на основе массива</a>
@@ -24,3 +17,4 @@ OpenJDK 64-Bit Server VM (build 11.0.5+10-post-Ubuntu-0ubuntu1.118.04, mixed mod
 10. <a href="/hw10-hibernate">Использование Hibernate</a>
 11. <a href="/hw11-cacheengine">Свой cache engine</a>
 12. <a href="/hw12-webserver">Веб сервер</a>
+13. <a href="/hw13-di">Приложение с IoC контейнером</a>
