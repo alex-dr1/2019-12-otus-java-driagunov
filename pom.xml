@@ -32,6 +32,7 @@
         <module>hw09-jdbcmapper</module>
         <module>hw10-hibernate</module>
         <module>hw11-cacheengine</module>
+        <module>hw14-jmm</module>
     </modules>
 
     <properties>
