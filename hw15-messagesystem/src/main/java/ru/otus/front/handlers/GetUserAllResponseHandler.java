@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service(value = "userAllResponse")
 public class GetUserAllResponseHandler implements RequestHandler {
     private static final Logger logger = LoggerFactory.getLogger(GetUserAllResponseHandler.class);
 

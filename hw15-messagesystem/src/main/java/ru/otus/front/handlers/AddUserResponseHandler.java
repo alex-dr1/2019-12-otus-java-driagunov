@@ -10,7 +10,6 @@ import ru.otus.messagesystem.RequestHandler;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service(value = "addUserResponse")
 public class AddUserResponseHandler implements RequestHandler {
     private static final Logger logger = LoggerFactory.getLogger(AddUserResponseHandler.class);
 

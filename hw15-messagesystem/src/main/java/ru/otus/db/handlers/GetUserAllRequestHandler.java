@@ -13,7 +13,6 @@ import ru.otus.messagesystem.RequestHandler;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@Service(value = "allUserRequest")
 public class GetUserAllRequestHandler implements RequestHandler {
     private static final Logger logger = LoggerFactory.getLogger(GetUserAllRequestHandler.class);
     private final DBServiceUser dbServiceUser;

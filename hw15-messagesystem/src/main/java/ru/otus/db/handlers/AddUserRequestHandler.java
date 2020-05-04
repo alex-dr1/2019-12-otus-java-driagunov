@@ -12,7 +12,6 @@ import ru.otus.messagesystem.RequestHandler;
 
 import java.util.Optional;
 
-@Service(value = "addUserRequest")
 public class AddUserRequestHandler implements RequestHandler {
     private static final Logger logger = LoggerFactory.getLogger(AddUserRequestHandler.class);
     private final DBServiceUser dbServiceUser;
