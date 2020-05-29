@@ -31,12 +31,6 @@ public class UserController {
     template.convertAndSend("/topic/mesAddUser", true);
   }
 
-//  private void sendTrueUserAdded(long id){
-//    if (id > 0){
-//      template.convertAndSend("/topic/mesAddUser", true);
-//    }
-//  }
-
   @MessageMapping("/getUserList")
   public void getUserList(){
     frontendService.getUserAll(this::sendUserList);

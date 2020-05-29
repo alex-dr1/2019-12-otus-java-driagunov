@@ -89,7 +89,7 @@ public class DBService {
 				receiveSocketMSg(dIn);
 			}
 		} catch (Exception ex) {
-			System.out.print("-");
+			logger.info("Connection not established");
 			pause(10L);
 		}
 	}
@@ -103,7 +103,7 @@ public class DBService {
 
 			RequestHandler requestHandler = handlers.get(socketMsgIn.getType());
 			requestHandler.handle(socketMsgIn).ifPresent(socketMsgQueue::offer);
-			System.out.print("+");
+			logger.info("Connection established");
 		}
 	}
 

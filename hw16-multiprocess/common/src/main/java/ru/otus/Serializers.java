@@ -21,7 +21,7 @@ public class Serializers {
             os.flush();
             return baos.toByteArray();
         } catch (Exception e) {
-            logger.error("Serialization error, data:" + data, e);
+            logger.error("Serialization error, data:{}", data, e);
             throw new RuntimeException("Serialization error:" + e.getMessage());
         }
     }
@@ -32,7 +32,7 @@ public class Serializers {
             Object obj = is.readObject();
             return classOfT.cast(obj);
         } catch (Exception e) {
-            logger.error("DeSerialization error, classOfT:" + classOfT, e);
+            logger.error("DeSerialization error, classOfT:{}", classOfT, e);
             throw new RuntimeException("DeSerialization error:" + e.getMessage());
         }
     }
